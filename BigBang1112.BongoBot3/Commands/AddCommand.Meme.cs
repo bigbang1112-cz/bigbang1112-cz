@@ -23,7 +23,12 @@ public partial class AddCommand
         {
             if (Content is null)
             {
-                return new DiscordBotMessage("Please give me something to add.");
+                return new DiscordBotMessage("Please give me something to add.", ephemeral: true);
+            }
+
+            if (await _repo.MemeExistsAsync(Content))
+            {
+                return new DiscordBotMessage("This meme already exists.", ephemeral: true);
             }
 
             var meme = new MemeModel
