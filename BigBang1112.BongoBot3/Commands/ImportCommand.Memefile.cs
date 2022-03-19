@@ -9,7 +9,7 @@ namespace BigBang1112.BongoBot3.Commands;
 public partial class ImportCommand
 {
     [DiscordBotSubCommand("memefile")]
-    public class Memefile : DiscordBotCommand
+    public class Memefile : GuildCommand
     {
         private readonly HttpClient _http;
         private readonly IDiscordBotRepo _repo;
@@ -17,13 +17,13 @@ public partial class ImportCommand
         [DiscordBotCommandOption("file", ApplicationCommandOptionType.Attachment, "Memefile XML.", IsRequired = true)]
         public Attachment File { get; set; } = default!;
 
-        public Memefile(DiscordBotService discordBotService, HttpClient http, IDiscordBotRepo repo) : base(discordBotService)
+        public Memefile(DiscordBotService discordBotService, IDiscordBotRepo repo, HttpClient http) : base(discordBotService, repo)
         {
             _http = http;
             _repo = repo;
         }
 
-        public override async Task<DiscordBotMessage> ExecuteAsync(SocketSlashCommand slashCommand, Deferer deferer)
+        public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketSlashCommand slashCommand, Deferer deferer, DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
         {
             if (!File.ContentType.StartsWith("application/xml"))
             {
@@ -39,31 +39,12 @@ public partial class ImportCommand
                 return new DiscordBotMessage("XML has an error.", ephemeral: true);
             }
 
-            var discordBotGuid = GetDiscordBotGuid();
-
-            if (discordBotGuid is null)
-            {
-                return new DiscordBotMessage("I cannot store anything into a database.", ephemeral: true);
-            }
-
-            if (slashCommand.Channel is not SocketTextChannel textChannel)
-            {
-                return new DiscordBotMessage("Not a text channel, server cannot be detected.", ephemeral: true);
-            }
-
             if (slashCommand.User is SocketGuildUser guildUser)
             {
                 if (!guildUser.GuildPermissions.Administrator)
                 {
                     return new DiscordBotMessage("You don't have permissions to import a memefile.", ephemeral: true);
                 }
-            }
-
-            var joinedGuild = await _repo.GetJoinedDiscordGuildAsync(discordBotGuid.Value, textChannel);
-
-            if (joinedGuild is null)
-            {
-                return new DiscordBotMessage("Guild couldn't be detected for unknown reason.", ephemeral: true);
             }
 
             await deferer.DeferAsync(ephemeral: true);
