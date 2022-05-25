@@ -7,9 +7,4 @@ public partial class ImportCommand : DiscordBotCommand
     {
 
     }
-
-    public override Task<DiscordBotMessage> ExecuteAsync(SocketSlashCommand slashCommand)
-    {
-        throw new NotImplementedException();
-    }
 }

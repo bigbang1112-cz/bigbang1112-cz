@@ -12,18 +12,18 @@ public partial class ImportCommand
     public class Memefile : GuildCommand
     {
         private readonly HttpClient _http;
-        private readonly IDiscordBotRepo _repo;
+        private readonly IDiscordBotUnitOfWork _discordBotUnitOfWork;
 
         [DiscordBotCommandOption("file", ApplicationCommandOptionType.Attachment, "Memefile XML.", IsRequired = true)]
         public Attachment File { get; set; } = default!;
 
-        public Memefile(DiscordBotService discordBotService, IDiscordBotRepo repo, HttpClient http) : base(discordBotService, repo)
+        public Memefile(DiscordBotService discordBotService, IDiscordBotUnitOfWork discordBotUnitOfWork, HttpClient http) : base(discordBotService, discordBotUnitOfWork)
         {
             _http = http;
-            _repo = repo;
+            _discordBotUnitOfWork = discordBotUnitOfWork;
         }
 
-        public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketSlashCommand slashCommand, Deferer deferer, DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
+        public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketInteraction slashCommand, Deferer deferer, DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
         {
             if (!File.ContentType.StartsWith("application/xml"))
             {
@@ -49,7 +49,7 @@ public partial class ImportCommand
 
             await deferer.DeferAsync(ephemeral: true);
 
-            var existingMemes = await _repo.GetMemesFromGuildAsync(joinedGuild);
+            var existingMemes = await _discordBotUnitOfWork.Memes.GetFromGuildAsync(joinedGuild);
             var existingMemesHashSet = existingMemes.Select(x => x.Content).ToHashSet();
 
             var memes = xml.Root.Descendants().Select(x =>
@@ -82,9 +82,9 @@ public partial class ImportCommand
                 };
             }).Where(x => !string.IsNullOrEmpty(x.Content) && !existingMemesHashSet.Contains(x.Content));
 
-            await _repo.AddMemesAsync(memes);
+            await _discordBotUnitOfWork.Memes.AddRangeAsync(memes);
 
-            await _repo.SaveAsync();
+            await _discordBotUnitOfWork.SaveAsync();
 
             return new DiscordBotMessage("XML imported.", ephemeral: true);
         }

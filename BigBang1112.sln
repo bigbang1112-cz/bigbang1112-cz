@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigBang1112", "BigBang1112\BigBang1112.csproj", "{06853D07-2CDA-4DA0-9AA9-B8E20E83AA0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigBang1112", "BigBang1112\BigBang1112.csproj", "{06853D07-2CDA-4DA0-9AA9-B8E20E83AA0C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigBang1112.Essentials", "BigBang1112.Essentials\BigBang1112.Essentials\BigBang1112.Essentials.csproj", "{F2A7B20F-149B-44D5-A97A-60F4A437D523}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigBang1112.BongoBot3", "BigBang1112.BongoBot3\BigBang1112.BongoBot3.csproj", "{6600F3B8-41D3-4B4A-BAD7-CB65B3B8646F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigBang1112.BongoBot3", "BigBang1112.BongoBot3\BigBang1112.BongoBot3.csproj", "{6600F3B8-41D3-4B4A-BAD7-CB65B3B8646F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigBang1112.DiscordBot", "BigBang1112.Essentials\BigBang1112.DiscordBot\BigBang1112.DiscordBot.csproj", "{5CEEB62B-BA96-4AA4-8532-07ADEFB7DE98}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigBang1112.Essentials.Razor", "BigBang1112.Essentials\BigBang1112.Essentials.Razor\BigBang1112.Essentials.Razor.csproj", "{243CD306-E0EE-4CB6-B747-8F84942D75B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5CEEB62B-BA96-4AA4-8532-07ADEFB7DE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CEEB62B-BA96-4AA4-8532-07ADEFB7DE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CEEB62B-BA96-4AA4-8532-07ADEFB7DE98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{243CD306-E0EE-4CB6-B747-8F84942D75B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{243CD306-E0EE-4CB6-B747-8F84942D75B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{243CD306-E0EE-4CB6-B747-8F84942D75B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{243CD306-E0EE-4CB6-B747-8F84942D75B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

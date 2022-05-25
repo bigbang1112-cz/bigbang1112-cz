@@ -1,0 +1,18 @@
+﻿.section {
+    display: flex;
+    justify-content: center;
+    column-gap: 0.5rem;
+}
+
+.icon {
+    width: 48px;
+}
+
+.button {
+    width: 4rem;
+    height: 3.5rem;
+}
+
+.logo {
+    margin-bottom: 3rem;
+}

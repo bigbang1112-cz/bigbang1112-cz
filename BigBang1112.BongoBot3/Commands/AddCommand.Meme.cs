@@ -9,24 +9,24 @@ public partial class AddCommand
     [DiscordBotSubCommand("meme")]
     public class Meme : GuildCommand
     {
-        private readonly IDiscordBotRepo _repo;
+        private readonly IDiscordBotUnitOfWork _discordBotUnitOfWork;
 
         [DiscordBotCommandOption("content", ApplicationCommandOptionType.String, "Content of the meme.", IsRequired = true)]
         public string? Content { get; set; }
 
-        public Meme(DiscordBotService discordBotService, IDiscordBotRepo repo) : base(discordBotService, repo)
+        public Meme(DiscordBotService discordBotService, IDiscordBotUnitOfWork discordBotUnitOfWork) : base(discordBotService, discordBotUnitOfWork)
         {
-            _repo = repo;
+            _discordBotUnitOfWork = discordBotUnitOfWork;
         }
 
-        public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketSlashCommand slashCommand, Deferer deferer, DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
+        public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketInteraction slashCommand, Deferer deferer, DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
         {
             if (Content is null)
             {
                 return new DiscordBotMessage("Please give me something to add.", ephemeral: true);
             }
 
-            if (await _repo.MemeExistsAsync(Content))
+            if (await _discordBotUnitOfWork.Memes.ExistsAsync(Content))
             {
                 return new DiscordBotMessage("This meme already exists.", ephemeral: true);
             }
@@ -40,9 +40,9 @@ public partial class AddCommand
                 Content = Content
             };
 
-            await _repo.AddMemeAsync(meme);
+            await _discordBotUnitOfWork.Memes.AddAsync(meme);
 
-            await _repo.SaveAsync();
+            await _discordBotUnitOfWork.SaveAsync();
 
             return new DiscordBotMessage
             {

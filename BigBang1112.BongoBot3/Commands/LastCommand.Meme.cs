@@ -8,16 +8,16 @@ public partial class LastCommand
     [DiscordBotSubCommand("meme", "Gets the last meme.")]
     public class Meme : GuildCommand
     {
-        private readonly IDiscordBotRepo _repo;
+        private readonly IDiscordBotUnitOfWork _discordBotUnitOfWork;
 
-        public Meme(DiscordBotService discordBotService, IDiscordBotRepo repo) : base(discordBotService, repo)
+        public Meme(DiscordBotService discordBotService, IDiscordBotUnitOfWork discordBotUnitOfWork) : base(discordBotService, discordBotUnitOfWork)
         {
-            _repo = repo;
+            _discordBotUnitOfWork = discordBotUnitOfWork;
         }
 
-        public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketSlashCommand slashCommand, Deferer deferer, DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
+        public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketInteraction slashCommand, Deferer deferer, DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
         {
-            var meme = await _repo.GetLastMemeAsync(joinedGuild);
+            var meme = await _discordBotUnitOfWork.Memes.GetLastAsync(joinedGuild);
 
             if (meme is null)
             {

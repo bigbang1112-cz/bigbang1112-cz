@@ -5,16 +5,16 @@ namespace BigBang1112.BongoBot3.Commands;
 [DiscordBotCommand("memes")]
 public partial class MemesCommand : GuildCommand
 {
-    private readonly IDiscordBotRepo _repo;
+    private readonly IDiscordBotUnitOfWork _discordBotUnitOfWork;
 
-    public MemesCommand(DiscordBotService discordBotService, IDiscordBotRepo repo) : base(discordBotService, repo)
+    public MemesCommand(DiscordBotService discordBotService, IDiscordBotUnitOfWork discordBotUnitOfWork) : base(discordBotService, discordBotUnitOfWork)
     {
-        _repo = repo;
+        _discordBotUnitOfWork = discordBotUnitOfWork;
     }
 
-    public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketSlashCommand slashCommand, Deferer deferer, DiscordBot.Models.Db.DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
+    public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketInteraction slashCommand, Deferer deferer, DiscordBot.Models.Db.DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
     {
-        var meme = await _repo.GetRandomMemeAsync(joinedGuild);
+        var meme = await _discordBotUnitOfWork.Memes.GetRandomAsync(joinedGuild);
 
         if (meme is null)
         {

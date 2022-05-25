@@ -20,7 +20,7 @@ var options = new EssentialsOptions
 builder.Services.AddEssentials(options);
 
 builder.Services.AddDbContext2<DiscordBotContext>(options.Config, "DiscordBotDb");
-builder.Services.AddScoped<IDiscordBotRepo, DiscordBotRepo>();
+builder.Services.AddScoped<IDiscordBotUnitOfWork, DiscordBotUnitOfWork>();
 
 builder.Services.AddHostedService<BongoBot3DiscordBotService>();
 
