@@ -1,6 +1,17 @@
 ﻿<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="typeof(MainLayout)">
+            <NotAuthorized>
+                <LayoutView>
+                    <StatusCode Value="401" NoRedirectFor401="true" Message="Sorry, you're not allowed to see this."></StatusCode>
+                </LayoutView>
+            </NotAuthorized>
+            <Authorizing>
+                <div class="section">
+                    <span>Authorizing...</span>
+                </div>
+            </Authorizing>
+        </AuthorizeRouteView>
     </Found>
     <NotFound>
         <PageTitle>Not found</PageTitle>

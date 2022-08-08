@@ -1,0 +1,36 @@
+﻿@using BongoBot3
+
+@page "/admin"
+
+@attribute [Authorize(Roles = "SuperAdmin")]
+
+@inject BongoBot3DiscordBotService _bongobot3
+
+<h3>Admin</h3>
+
+<button class="button" @onclick="UpdateGlobalDiscordCommandsAsync">Update global commands</button>
+<button class="button" @onclick="ClearGlobalDiscordCommandsAsync">Clear global commands</button>
+<button class="button" @onclick="UpdateDiscordServerCommandsAsync">Update Discord server commands</button>
+<button class="button" @onclick="ClearDiscordServerCommandsAsync">Clear Discord server commands</button>
+
+@code {
+    private async Task UpdateGlobalDiscordCommandsAsync()
+    {
+        await _bongobot3.OverwriteGlobalApplicationCommandsAsync();
+    }
+
+    private async Task ClearGlobalDiscordCommandsAsync()
+    {
+        await _bongobot3.ClearGlobalApplicationCommandsAsync();
+    }
+
+    private async Task UpdateDiscordServerCommandsAsync()
+    {
+        await _bongobot3.OverwriteGuildApplicationCommandsAsync();
+    }
+
+    private async Task ClearDiscordServerCommandsAsync()
+    {
+        await _bongobot3.ClearGuildApplicationCommandsAsync();
+    }
+}

@@ -22,7 +22,8 @@ builder.Services.AddEssentials(options);
 builder.Services.AddDbContext2<DiscordBotContext>(options.Config, "DiscordBotDb");
 builder.Services.AddScoped<IDiscordBotUnitOfWork, DiscordBotUnitOfWork>();
 
-builder.Services.AddHostedService<BongoBot3DiscordBotService>();
+builder.Services.AddSingleton<BongoBot3DiscordBotService>();
+builder.Services.AddHostedService(x => x.GetRequiredService<BongoBot3DiscordBotService>());
 
 var app = builder.Build();
 
