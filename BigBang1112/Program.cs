@@ -7,6 +7,8 @@ var assembly = typeof(Program).Assembly;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseEssentials();
+
 var config = builder.Configuration;
 
 var options = new EssentialsOptions
