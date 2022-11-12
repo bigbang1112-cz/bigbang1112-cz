@@ -26,6 +26,7 @@
 		<ProjectReference Include="..\BigBang1112.BongoBot3\BigBang1112.BongoBot3.csproj" />
 		<ProjectReference Include="..\BigBang1112.Essentials\BigBang1112.Essentials.Razor\BigBang1112.Essentials.Razor.csproj" />
 		<ProjectReference Include="..\BigBang1112.Essentials\BigBang1112.Essentials\BigBang1112.Essentials.csproj" />
+		<ProjectReference Include="..\BigBang1112.UniReminder\BigBang1112.UniReminder.csproj" />
 	</ItemGroup>
 
 </Project>
