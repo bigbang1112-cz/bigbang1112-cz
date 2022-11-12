@@ -96,20 +96,16 @@ public partial class PredmetCommand : DiscordBotCommand
 
         if (predmet.ZS)
         {
-            zsLs += "(ZS";
+            zsLs += "Zimní";
 
             if (predmet.LS)
             {
-                zsLs += " i LS)";
-            }
-            else
-            {
-                zsLs += ")";
+                zsLs += " i Letní";
             }
         }
         else if (predmet.LS)
         {
-            zsLs = "(LS)";
+            zsLs = "Letní";
         }
 
         var messageComponent = default(MessageComponent);
@@ -124,10 +120,11 @@ public partial class PredmetCommand : DiscordBotCommand
         }
 
         return new DiscordBotMessage(new EmbedBuilder()
-            .WithTitle($"{predmet.Pracoviste}/{predmet.Predmet} - {predmet.Nazev} {zsLs}")
+            .WithTitle($"{predmet.Pracoviste}/{predmet.Predmet} - {predmet.Nazev}")
             .WithColor(Color.Purple)
             .WithDescription("Triviální předmět, při kterém budete psát zápočty až do aleluja.")
             .AddField("Typ zkoušky", predmet.TypZkousky, inline: true)
+            .AddField("Semestr", zsLs, inline: true)
             .AddField("Kredity", predmet.Kredity, inline: true)
             .WithImageUrl(grafUrl)
             .Build(), component: messageComponent);
