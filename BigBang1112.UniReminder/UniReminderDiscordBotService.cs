@@ -17,7 +17,6 @@ public class UniReminderDiscordBotService : DiscordBotService
     {
         await base.ReadyAsync();
         
-        await Client.SetStatusAsync(Discord.UserStatus.Idle);
         await Client.SetGameAsync("si s konzolí");
     }
 }
