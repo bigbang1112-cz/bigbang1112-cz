@@ -122,7 +122,7 @@ public partial class PredmetCommand : DiscordBotCommand
         return new DiscordBotMessage(new EmbedBuilder()
             .WithTitle($"{predmet.Pracoviste}/{predmet.Predmet} - {predmet.Nazev}")
             .WithColor(Color.Purple)
-            .WithDescription("Triviální předmět, při kterém budete psát zápočty až do aleluja.")
+            .WithDescription(string.IsNullOrWhiteSpace(predmet.Pozadavky) ? "Triviální předmět, při kterém budete psát zápočty až do aleluja." : predmet.Pozadavky)
             .AddField("Typ zkoušky", predmet.TypZkousky, inline: true)
             .AddField("Semestr", zsLs, inline: true)
             .AddField("Kredity", predmet.Kredity, inline: true)
