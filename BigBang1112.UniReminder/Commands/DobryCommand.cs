@@ -18,7 +18,7 @@ public partial class DobryCommand : DiscordBotCommand
         return base.ExecuteAsync(slashCommand);
     }
 
-    [DiscordBotSubCommand("den")]
+    [DiscordBotSubCommand("den", "Pozdravte mě.")]
     public partial class Den : DiscordBotCommand
     {
         public Den(DiscordBotService discordBotService) : base(discordBotService)

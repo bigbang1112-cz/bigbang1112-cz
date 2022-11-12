@@ -16,6 +16,10 @@ public class UniReminderDiscordBotService : DiscordBotService
     protected override async Task ReadyAsync()
     {
         await base.ReadyAsync();
+        
+        await Client.SetStatusAsync(Discord.UserStatus.Idle);
+        await Client.SetGameAsync("si s konzolí");
+        
         await OverwriteGuildApplicationCommandsAsync();
     }
 }
