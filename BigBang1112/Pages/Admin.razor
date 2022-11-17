@@ -1,10 +1,12 @@
 ﻿@using BongoBot3
+@using UniReminder
 
 @page "/admin"
 
 @attribute [Authorize(Roles = "SuperAdmin")]
 
 @inject BongoBot3DiscordBotService _bongobot3
+@inject UniReminderDiscordBotService _uniReminder
 
 <h3>Admin</h3>
 
@@ -17,20 +19,24 @@
     private async Task UpdateGlobalDiscordCommandsAsync()
     {
         await _bongobot3.OverwriteGlobalApplicationCommandsAsync();
+        await _uniReminder.OverwriteGlobalApplicationCommandsAsync();
     }
 
     private async Task ClearGlobalDiscordCommandsAsync()
     {
         await _bongobot3.ClearGlobalApplicationCommandsAsync();
+        await _uniReminder.ClearGlobalApplicationCommandsAsync();
     }
 
     private async Task UpdateDiscordServerCommandsAsync()
     {
         await _bongobot3.OverwriteGuildApplicationCommandsAsync();
+        await _uniReminder.OverwriteGuildApplicationCommandsAsync();
     }
 
     private async Task ClearDiscordServerCommandsAsync()
     {
         await _bongobot3.ClearGuildApplicationCommandsAsync();
+        await _uniReminder.ClearGuildApplicationCommandsAsync();
     }
 }
