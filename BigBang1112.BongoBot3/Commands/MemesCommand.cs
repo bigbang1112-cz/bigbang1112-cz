@@ -1,4 +1,5 @@
 ﻿using BigBang1112.DiscordBot.Data;
+using BigBang1112.DiscordBot.Models.Db;
 
 namespace BigBang1112.BongoBot3.Commands;
 
@@ -12,7 +13,7 @@ public partial class MemesCommand : GuildCommand
         _discordBotUnitOfWork = discordBotUnitOfWork;
     }
 
-    public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketInteraction slashCommand, Deferer deferer, DiscordBot.Models.Db.DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
+    public override async Task<DiscordBotMessage> ExecuteWithJoinedGuildAsync(SocketInteraction slashCommand, Deferer deferer, DiscordBotJoinedGuildModel joinedGuild, SocketTextChannel textChannel)
     {
         var meme = await _discordBotUnitOfWork.Memes.GetRandomAsync(joinedGuild);
 

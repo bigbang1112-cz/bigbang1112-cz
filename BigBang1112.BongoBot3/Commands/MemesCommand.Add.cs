@@ -4,17 +4,17 @@ using Discord;
 
 namespace BigBang1112.BongoBot3.Commands;
 
-public partial class AddCommand
+public partial class MemesCommand
 {
-    [DiscordBotSubCommand("meme")]
-    public class Meme : GuildCommand
+    [DiscordBotSubCommand("add")]
+    public class Add : GuildCommand
     {
         private readonly IDiscordBotUnitOfWork _discordBotUnitOfWork;
 
         [DiscordBotCommandOption("content", ApplicationCommandOptionType.String, "Content of the meme.", IsRequired = true)]
         public string? Content { get; set; }
 
-        public Meme(DiscordBotService discordBotService, IDiscordBotUnitOfWork discordBotUnitOfWork) : base(discordBotService, discordBotUnitOfWork)
+        public Add(DiscordBotService discordBotService, IDiscordBotUnitOfWork discordBotUnitOfWork) : base(discordBotService, discordBotUnitOfWork)
         {
             _discordBotUnitOfWork = discordBotUnitOfWork;
         }

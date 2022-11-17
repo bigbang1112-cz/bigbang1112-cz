@@ -3,14 +3,14 @@ using BigBang1112.DiscordBot.Models.Db;
 
 namespace BigBang1112.BongoBot3.Commands;
 
-public partial class LastCommand
+public partial class MemesCommand
 {
-    [DiscordBotSubCommand("meme", "Gets the last meme.")]
-    public class Meme : GuildCommand
+    [DiscordBotSubCommand("last", "Gets the last meme.")]
+    public class Last : GuildCommand
     {
         private readonly IDiscordBotUnitOfWork _discordBotUnitOfWork;
 
-        public Meme(DiscordBotService discordBotService, IDiscordBotUnitOfWork discordBotUnitOfWork) : base(discordBotService, discordBotUnitOfWork)
+        public Last(DiscordBotService discordBotService, IDiscordBotUnitOfWork discordBotUnitOfWork) : base(discordBotService, discordBotUnitOfWork)
         {
             _discordBotUnitOfWork = discordBotUnitOfWork;
         }
