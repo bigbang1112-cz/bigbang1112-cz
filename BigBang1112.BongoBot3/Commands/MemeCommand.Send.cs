@@ -4,7 +4,7 @@ using Discord;
 
 namespace BigBang1112.BongoBot3.Commands;
 
-public partial class MemesCommand
+public partial class MemeCommand
 {
     [DiscordBotSubCommand("send", "Send a meme to someone.")]
     public class Send : GuildCommand

@@ -3,7 +3,7 @@ using BigBang1112.DiscordBot.Models.Db;
 
 namespace BigBang1112.BongoBot3.Commands;
 
-public partial class MemesCommand
+public partial class MemeCommand
 {
     [DiscordBotSubCommand("last", "Gets the last meme.")]
     public class Last : GuildCommand
