@@ -3,8 +3,6 @@ name: Docker Image push to registry
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
     
 env:
   BUILD_DIR: BigBang1112
