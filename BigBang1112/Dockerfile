@@ -17,9 +17,9 @@ WORKDIR "/src/BigBang1112"
 RUN dotnet build "BigBang1112.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "BigBang1112.csproj" -c Release -o /app/publish -r linux-x64 -p:PublishReadyToRun=true --self-contained
+RUN dotnet publish "BigBang1112.csproj" -c Release -o /app/publish -r linux-musl-x64 -p:PublishReadyToRun=true --self-contained
 
 FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-alpine
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["./BigBang1112.dll"]
+ENTRYPOINT ["./BigBang1112"]
