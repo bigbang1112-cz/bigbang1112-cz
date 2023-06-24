@@ -1,7 +1,5 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS base
 WORKDIR /app
-RUN apk add --no-cache icu-libs
-ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 EXPOSE 80
 EXPOSE 443
 
@@ -22,6 +20,8 @@ FROM build AS publish
 RUN dotnet publish "BigBang1112.csproj" -c Release -o /app/publish -r linux-musl-x64 -p:PublishReadyToRun=true --self-contained
 
 FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-alpine
+RUN apk add --no-cache icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["./BigBang1112"]
