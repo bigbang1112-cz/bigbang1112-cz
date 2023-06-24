@@ -22,4 +22,4 @@ RUN dotnet publish "BigBang1112.csproj" -c Release -o /app/publish -r linux-x64 
 FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-alpine
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BigBang1112.dll"]
+ENTRYPOINT ["./BigBang1112.dll"]
