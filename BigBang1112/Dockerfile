@@ -19,7 +19,7 @@ RUN dotnet build "BigBang1112.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "BigBang1112.csproj" -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/runtime-deps:7.0-alpine
+FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-alpine
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["./BigBang1112"]
