@@ -17,6 +17,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+       submodules: recursive
     - name: Build Docker image
       run: docker build . -f $BUILD_DIR/Dockerfile -t $REGISTRY_URL/$IMAGE_NAME
     - name: Push Docker image to registry
